@@ -45,6 +45,12 @@ Rules:
 - Omit the body when the subject is sufficient
 - Avoid merely listing changed files
 
+## Verify
+
+Ask the user if they are happy with the commit title and body.
+If not, make the changes the user asked for and verify again.
+Once verified, commit with the instructions below.
+
 ## Commit command
 
 When committing from the shell, preserve newlines with a heredoc:
