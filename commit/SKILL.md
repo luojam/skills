@@ -1,6 +1,7 @@
 ---
 name: commit
-description: Write concise Git commit messages from staged or unstaged Git diffs. Use only when asked to draft, improve, or create a commit message.
+description: Write concise Git commit messages
+disable-model-invocation: true
 ---
 
 # Git Commit Message Skill
@@ -10,21 +11,16 @@ of the change.
 
 ## Inspect the diff
 
-Check staged changes first:
-
 ```sh
 git diff --staged
 ```
-
-If nothing is staged, check unstaged changes:
 
 ```sh
 git diff
 ```
 
-Base the message on the actual diff, not just filenames. Focus on the
-user-visible or developer-visible effect. If the diff contains unrelated
-changes, suggest splitting it; otherwise write a message that honestly
+Base the message on the actual diff, not just filenames. If the diff contains
+unrelated changes, suggest splitting it; otherwise write a message that honestly
 covers the combined change.
 
 ## Write the message
@@ -34,8 +30,8 @@ Use the standard format:
 ```text
 Imperative subject under 50 chars
 
-Optional body wrapped at 72 chars. Explain what changed, why it changed,
-and any important behavior, compatibility, testing, or follow-up context.
+Optional body wrapped at 72 chars. Explain what changed/why it changed and any
+important behavior. Keep the body concise. Max 1 paragraph if possible.
 ```
 
 Rules:
@@ -43,7 +39,6 @@ Rules:
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period
 - Omit the body when the subject is sufficient
-- Avoid merely listing changed files
 
 ## Verify
 
@@ -59,7 +54,7 @@ When committing from the shell, preserve newlines with a heredoc:
 git commit -m "$(cat <<'EOF'
 Subject line here
 
-Body wrapped at 72 characters when useful.
+Body wrapped at 72 characters.
 EOF
 )"
 ```
