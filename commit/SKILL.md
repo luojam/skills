@@ -34,7 +34,7 @@ Optional body wrapped at 72 chars. Explain what changed/why it changed and any
 important behavior. Keep the body concise. Max 1 paragraph if possible.
 ```
 
-Rules:
+### Rules:
 
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period

@@ -1,6 +1,7 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building.
+description: Grill the user relentlessly about a plan or design. Use when the
+    user wants to stress-test a plan before building.
 disable-model-invocation: true
 ---
 
