@@ -28,14 +28,16 @@ covers the combined change.
 Use the standard format:
 
 ```text
-Imperative subject under 50 chars
+Imperative subject around 50 chars
 
-Optional body wrapped at 72 chars. Explain what changed/why it changed and any
-important behavior. Keep the body concise. Max 1 paragraph if possible.
+Optional body wrapped at 72 chars. Explain what changed/why it changed
+and any important behavior. Keep the body concise. Max 1 paragraph if
+possible.
 ```
 
 ### Rules:
 
+- Commit body must NEVER have lines over 72 chars
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period
 - Omit the body when the subject is sufficient
