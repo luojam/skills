@@ -4,31 +4,20 @@ description: Write concise Git commit messages
 disable-model-invocation: true
 ---
 
-# Git Commit Message Skill
+# Git commit message skill
 
-Inspect the diff first and write a concise message that describes the intent
-of the change.
+## Inspect
 
-## Inspect the diff
+Run `git diff --staged`. If nothing is staged, fall back to `git diff`.
 
-```sh
-git diff --staged
-```
+Base the message on the actual diff, not just filenames. If it contains
+unrelated changes, suggest splitting it; otherwise write a message that
+honestly covers the combined change.
 
-```sh
-git diff
-```
-
-Base the message on the actual diff, not just filenames. If the diff contains
-unrelated changes, suggest splitting it; otherwise write a message that honestly
-covers the combined change.
-
-## Write the message
-
-Use the standard format:
+## Format
 
 ```text
-Imperative subject around 50 chars
+Imperative subject
 
 Optional body wrapped at 72 chars. Explain what changed/why it changed
 and any important behavior. Keep the body concise. Max 1 paragraph if
@@ -37,26 +26,46 @@ possible.
 
 ### Rules:
 
-- Commit body must NEVER have lines over 72 chars
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period
+- Aim for 50 char subject with 72 char hard cap
 - Omit the body when the subject is sufficient
 
 ## Verify
 
-Ask the user if they are happy with the commit title and body.
-If not, make the changes the user asked for and verify again.
-Once verified, commit with the instructions below.
-
-## Commit command
-
-When committing from the shell, preserve newlines with a heredoc:
+Write the complete proposed message to `.git/COMMIT_EDITMSG`, using a
+heredoc so that hard newlines are preserved:
 
 ```sh
-git commit -m "$(cat <<'EOF'
+cat >.git/COMMIT_EDITMSG <<'EOF'
 Subject line here
 
-Body wrapped at 72 characters.
+Body wrapped with hard newlines at or before column 72.
 EOF
-)"
+```
+
+Mechanically reject lines longer than 72 characters:
+
+```sh
+awk 'length($0) > 72 {
+  printf "Line %d is %d characters\n", NR, length($0)
+  invalid = 1
+}
+END { exit invalid }' .git/COMMIT_EDITMSG
+```
+
+Do not present or commit the message unless this command succeeds.
+
+## Validate
+
+Show the verified title and body to the user and ask if they are happy
+with it. If not, make requested changes and repeat verification before
+presenting it again.
+
+## Commit
+
+Once validated, commit directly from the file:
+
+```sh
+git commit -F .git/COMMIT_EDITMSG
 ```
