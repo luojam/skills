@@ -40,5 +40,4 @@ expose discovered secrets in the review output.
 List findings to user in order of severity. Number each finding sequentially using
 its severity label, for example, `1. ❌ bug:`, `2. ⚠️ risk:`, and `3. 📝 nit:`.
 Include clear explanation of where and why each issue occurs. If no issues are
-found, tell the user that. Don't manufacture nits or hypotheticals just to seem
-thorough.
+found, tell the user that.
