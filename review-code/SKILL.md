@@ -19,7 +19,6 @@ expose discovered secrets in the review output.
 - `❌ bug:` — broken behavior, vulnerability, will cause incident
 - `⚠️ risk:` — might work but fragile (race, missing null check, swallowed error)
 - `📝 nit:` — style, naming, micro-optim. Non-blocking
-- `❓ q:` — genuine question if uncertain or unknown
 
 **Drop:**
 
