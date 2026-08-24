@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Write concise Git commit messages
+description: Use when asked to commit or create a commit message
 disable-model-invocation: true
 ---
 
@@ -9,6 +9,8 @@ disable-model-invocation: true
 ## Inspect
 
 Run `git diff --staged`. If nothing is staged, fall back to `git diff`.
+
+## Message
 
 Base the message on the actual diff, not just filenames. If it contains
 unrelated changes, suggest splitting it; otherwise write a message that
@@ -19,9 +21,7 @@ honestly covers the combined change.
 ```text
 Imperative subject
 
-Optional body wrapped at 72 chars. Explain what changed/why it changed
-and any important behavior. Keep the body concise. Max 1 paragraph if
-possible.
+Optional body wrapped at 72 chars. Max 1 paragraph if possible.
 ```
 
 ### Rules:
@@ -29,7 +29,7 @@ possible.
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period
 - Aim for 50 char subject with 72 char hard cap
-- Omit the body when the subject is sufficient
+- Prefer using only the subject. Add body only when title can't accurately describe what was done.
 
 ## Verify
 

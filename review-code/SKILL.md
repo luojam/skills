@@ -1,7 +1,6 @@
 ---
 name: review-code
-description: Review code changes systematically for correctness, architecture,
-    security, performance, maintainability, and test quality.
+description: Use when asked to do code review, review code
 disable-model-invocation: true
 ---
 
@@ -14,25 +13,25 @@ expose discovered secrets in the review output.
 
 ## Rules
 
-**Severity:**
+**Categorization**
 
 - `❌ bug:` — broken behavior, vulnerability, will cause incident
 - `⚠️ risk:` — might work but fragile (race, missing null check, swallowed error)
 - `📝 nit:` — style, naming, micro-optim. Non-blocking
 
-**Drop:**
+**What not to do**
 
-- Presenting hypothetical concerns as findings without a concrete failure scenario
-- Repeating the same root cause across multiple findings
-- Reviewing unrelated pre-existing code unless the change exposes or worsens the issue
-- Guessing, assuming or speculating. If unsure, state it clearly and ask. **Don't invent problems**
+- Present hypothetical concerns as findings without a concrete failure scenario
+- Repeat the same root cause across multiple findings
+- Review unrelated pre-existing code unless the change exposes or worsens the issue
+- Guess, assume or speculate. If unsure, state it clearly. **Don't invent problems**
 
-**Keep:**
+**What to do**
 
-- Exact line numbers
-- Exact symbol/function/variable names in backticks
-- Concrete fix or clear description
-- The _why_ if the fix isn't obvious from the problem statement
+- Show exact line numbers
+- Show exact symbol/function/variable names in backticks
+- Add clear problem description and concrete failure scenario
+- Present suggested fix if obvious
 
 ## Output
 
