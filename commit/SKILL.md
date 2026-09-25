@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Use when asked to commit or create a commit message
+description: Use when asked to commit or create a commit
 disable-model-invocation: true
 ---
 
@@ -8,13 +8,22 @@ disable-model-invocation: true
 
 ## Inspect
 
-Run `git diff --staged`. If nothing is staged, fall back to `git diff`.
+Run `git diff --staged`. If nothing is staged, stop and tell the user.
+Gather relevant repo context as needed, including untracked files.
 
 ## Message
 
-Base the message on the actual diff, not just filenames. If it contains
-unrelated changes, suggest splitting it; otherwise write a message that
-honestly covers the combined change.
+Base the message on the diff and known context. State what the change
+accomplishes in a short, specific, imperative subject. Default to
+subject only. Add a body only when omitting it would lose essential
+context, such as a non-obvious reason or constraint. Do not add a body
+merely to restate the subject or narrate the diff.
+
+Do not invent intent or benefits. Ask the user when missing context
+prevents an accurate description of the change.
+
+Suggest splitting unrelated changes; if kept together, cover each
+distinct change.
 
 ## Format
 
@@ -28,8 +37,7 @@ Optional body wrapped at 72 chars. Max 1 paragraph if possible.
 
 - Use imperative mood: `Fix cache invalidation bug`
 - Do not end the subject with a period
-- Aim for 50 char subject with 72 char hard cap
-- Prefer using only the subject. Add body only when title can't accurately describe what was done.
+- Aim for 50 char or shorter subject with 72 char hard cap
 
 ## Verify
 
