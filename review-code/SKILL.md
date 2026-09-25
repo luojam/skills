@@ -1,41 +1,32 @@
 ---
 name: review-code
-description: Use when asked to do code review, review code
+description: Use when asked to do code review or to review code
 disable-model-invocation: true
 ---
 
 # Code review
 
-Start by inspecting the diff (staged changes by default). Systematically review
-code changes for correctness, architecture, security, performance, maintainability,
-and test quality. Distinguish blocking defects from optional suggestions. Do not
-expose discovered secrets in the review output.
+Inspect the requested scope; default to the staged diff. If empty or
+unavailable, say so and stop. Systematically review code changes for
+correctness, security, and performance. Verify potential findings
+against relevant surrounding code, callers, and tests. Do not modify
+files.
 
 ## Rules
 
-**Categorization**
-
-- `❌ bug:` — broken behavior, vulnerability, will cause incident
-- `⚠️ risk:` — might work but fragile (race, missing null check, swallowed error)
-- `📝 nit:` — style, naming, micro-optim. Non-blocking
-
-**What not to do**
-
-- Present hypothetical concerns as findings without a concrete failure scenario
-- Repeat the same root cause across multiple findings
-- Review unrelated pre-existing code unless the change exposes or worsens the issue
-- Guess, assume or speculate. If unsure, state it clearly. **Don't invent problems**
-
-**What to do**
-
-- Show exact line numbers
-- Show exact symbol/function/variable names in backticks
-- Add clear problem description and concrete failure scenario
-- Present suggested fix if obvious
+- Report only issues introduced, exposed, or worsened by the changes
+- Each finding must be supported by code evidence, have a concrete
+  trigger and clearly explained real failure scenario or impact
+- Do not report speculative findings
+- Report each root cause only once
 
 ## Output
 
-List findings to user in order of severity. Number each finding sequentially using
-its severity label, for example, `1. ❌ bug:`, `2. ⚠️ risk:`, and `3. 📝 nit:`.
-Include clear explanation of where and why each issue occurs. If no issues are
-found, tell the user that.
+Number findings sequentially in order of severity. Each should include:
+
+- Severity (Critical/High/Medium/Low) and short descriptive title
+- Short description of real scenario where the issue would happen
+- Clear, concise explanation of where and why the issue occurs. Include
+  `path:line` and relevant `symbols`
+
+If no issues are found, say so. Briefly mention any gaps or uncertainty.
